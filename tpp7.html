@@ -1,0 +1,55 @@
+
+<html>
+<head>
+<title>Calcular Moda</title>
+</head>
+<body>
+<script>
+function generarVector(numValores) {
+    let vector = [];
+    for (let i = 0; i < numValores; i++) {
+        vector.push(Math.floor(Math.random() * 10)); 
+    }
+    return vector;
+}
+
+function calcularModa(conjunto) {
+    let frecuencias = {};
+    conjunto.forEach(function (numero) {
+        if (!frecuencias[numero]) {
+            frecuencias[numero] = 1;
+        } else {
+            frecuencias[numero]++;
+        }
+    });
+
+    let moda = null;
+    let maxFrecuencia = 0;
+    for (let numero in frecuencias) {
+        if (frecuencias[numero] > maxFrecuencia || moda === null) {
+            moda = numero;
+            maxFrecuencia = frecuencias[numero];
+        }
+    }
+
+    return moda;
+}
+
+let numValores = parseInt(prompt("Ingrese el número de valores del vector:"));
+let vector = generarVector(numValores);
+
+document.write("Vector generado: " + vector.join(", ") + "<br>");
+
+vector.sort(function (a, b) {
+    return a - b; 
+});
+
+document.write("Vector ordenado: " + vector.join(", ") + "<br>");
+
+let moda = calcularModa(vector);
+document.write("El número que más se repite es: " + moda);
+
+
+</script>
+</body>
+</html>
